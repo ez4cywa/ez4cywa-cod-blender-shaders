@@ -16,6 +16,7 @@
 这里是该研究的**干净开源子集**：
 
 - ✅ **19 个自包含节点组**——全部合并进单一 `.blend` 文件，无贴图依赖、无外部路径、开箱即用
+- ✅ **cast 材质自动加载**——根据 `.cast` 文件中的材质路径与贴图槽位，自动生成接好节点组的武器/人物/迷彩材质并赋予网格，见 [docs/AUTO_MATERIALS.md](docs/AUTO_MATERIALS.md)
 - ✅ **资产浏览器友好**——所有节点组已标记为 Blender 资产并打好分类标签，追加后直接在 Asset Browser 里筛选
 - ✅ **经过数值验证**——各版本交付均附带 Cycles 32 位线性 EXR 探针，误差普遍在 1e-5 ~ 1e-8 量级
 - ✅ **中文教程总览**——15 篇教程的知识地图与阅读路径，见 [docs/TUTORIALS_SUMMARY.md](docs/TUTORIALS_SUMMARY.md)
@@ -86,6 +87,31 @@ COD_Weapon_Master_v1 / Shader ──► Material Output / Surface
 
 没有游戏贴图也能用：把任意普通法线图经 Separate Color 处理后接 `COD_Game_NormalXY_Layer_v4` 系列做实验，或用 `COD_Camo_Coordinates_v1` 给自己的图案做可平移平铺投影。
 
+## 从 cast 自动加载材质
+
+用 vendored 的 [cast 解析器](vendor/ATTRIBUTION.md) 一步完成"导入几何 + 按材质路径自动生成接好节点组的材质 + 赋予网格"：
+
+```powershell
+blender -b --factory-startup --python-exit-code 1 --python scripts/autobuild_materials.py -- `
+  --import --cast path/to/model.cast `
+  --camo-dir path/to/camo_asset/ --manifest build_manifest.json --out my_materials.blend
+```
+
+- 语义解析：`_mat_info` 语义表交叉验证（47=底色 / 48=NOG / 4a=覆盖）优先，cast 具名槽兜底
+- Profile 规则（`scripts/profiles.json`）：武器 / 通用 / 人物子 profile（skin、hair、eye…）/ 迷彩分层自动分类，可自行扩展
+- 哨兵图程序生成、上游插件原地升级、跨资产同名材质自动拆分
+- 详细用法、角色表与边界：**[docs/AUTO_MATERIALS.md](docs/AUTO_MATERIALS.md)**
+
+只提取规格（普通 Python，不需要 Blender，也是 Maya 移植的共享接口）：
+
+```powershell
+python scripts/cast_spec.py --cast path/to/model.cast --out spec.json
+```
+
+## Maya 2025 移植状态
+
+**可行性分析与分阶段移植计划已交付（P0）**：结论为可行——数学层低难度、纹理层中等、CORNER 数据通路推荐导入期离线烘焙、Principled→aiStandardSurface 需标定；推荐"Arnold 原生节点图为主干 + OSL 承载数学核心"的组合路线。含四层节点映射表、三条路径对比与 P1–P6 阶段验收标准，见 **[docs/MAYA_2025_PORT.md](docs/MAYA_2025_PORT.md)**。尚未开始移植实施。
+
 ## 资产浏览器用法
 
 把本仓库目录添加为 Blender 资产库（`Preferences → File Paths → Asset Libraries`），打开库文件即可看到全部节点组，按标签筛选：
@@ -94,7 +120,7 @@ COD_Weapon_Master_v1 / Shader ──► Material Output / Surface
 
 ## 学习路径
 
-完整教程全文在私密研究仓库中，本仓库提供 **[教程总览](docs/TUTORIALS_SUMMARY.md)**：15 篇教程的定位、要点、对应节点组与推荐阅读路径。三条典型路径：
+完整教程全文在私密研究仓库中，本仓库提供 **[教程总览](docs/TUTORIALS_SUMMARY.md)**：15 篇教程的定位、要点、对应节点组与推荐阅读路径。工具文档：**[cast 材质自动加载](docs/AUTO_MATERIALS.md)** · **[Maya 2025 移植计划](docs/MAYA_2025_PORT.md)**。三条典型路径：
 
 - **入门**：节点连线指导 → 武器与人物实战 → 迷彩实战
 - **原理**：本地游戏程序与 Shader v2 → 法线 v4 → 方向基 v5 → 分页矩阵 v6 → 压缩三角形 v7

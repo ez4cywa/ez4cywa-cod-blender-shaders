@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "note": "Profile rules are evaluated top to bottom; first match wins. Copy this file and adjust for your assets. Character sub-profile control values follow the published tutorial defaults.",
+  "default_profile": "generic",
+  "profiles": {
+    "weapon": {
+      "group": "COD_Weapon_Master_v1",
+      "controls": {
+        "Metalness Weight": 1.0,
+        "Alpha Metal Threshold": 0.1
+      }
+    },
+    "generic": {
+      "group": "COD_Weapon_Master_v1",
+      "controls": {
+        "Metalness Weight": 0.0
+      }
+    },
+    "character": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.0,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.5
+      }
+    },
+    "character.cloth": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.15,
+        "Coat Weight": 0.0,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.5,
+        "Roughness Offset": 0.1
+      }
+    },
+    "character.skin": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.22,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.04,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.4,
+        "Roughness Offset": 0.05
+      }
+    },
+    "character.hair_card": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.12,
+        "Coat Weight": 0.0,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.5,
+        "Roughness Offset": -0.05,
+        "Roughness Map Weight": 0.0,
+        "Normal Strength": 0.4
+      },
+      "requires": ["opacity"]
+    },
+    "character.eye": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.8,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.5,
+        "Roughness Offset": -0.36,
+        "Roughness Map Weight": 0.0,
+        "Normal Strength": 0.15
+      }
+    },
+    "character.cornea_candidate": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.0,
+        "Transmission Weight": 1.0,
+        "Opacity": 1.0,
+        "IOR": 1.376,
+        "Roughness Offset": -0.47,
+        "Roughness Map Weight": 0.0,
+        "Normal Strength": 0.0
+      },
+      "unplug_base_color": true
+    },
+    "character.tearline": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.6,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.5,
+        "Roughness Offset": -0.4,
+        "Roughness Map Weight": 0.0,
+        "Normal Strength": 0.15
+      },
+      "requires": ["opacity"]
+    },
+    "character.oral": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.04,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.2,
+        "Transmission Weight": 0.0,
+        "Opacity": 1.0,
+        "IOR": 1.5,
+        "Roughness Offset": 0.1
+      }
+    },
+    "character.unresolved_overlay": {
+      "group": "COD_Character_Surface_v1",
+      "controls": {
+        "Metalness Weight": 0.0,
+        "SSS Weight": 0.0,
+        "SSS Scale": 0.0015,
+        "Sheen Weight": 0.0,
+        "Coat Weight": 0.0,
+        "Transmission Weight": 0.0,
+        "Opacity": 0.0,
+        "IOR": 1.5
+      }
+    }
+  },
+  "rules": [
+    {
+      "match": { "name_regex": "(^|/)wpn_|_vm_|_attachment|^attachment_" },
+      "profile": "weapon",
+      "note": "Weapon and attachment material paths"
+    },
+    {
+      "match": { "techset": "techset_7c5b347b60d04806" },
+      "profile": "character.skin",
+      "note": "Research project: visible face/hand skin atlas"
+    },
+    {
+      "match": { "techset_in": ["techset_3aab5a7986d884a7", "techset_638b48a267927efa"] },
+      "profile": "character.hair_card",
+      "note": "Research project: hair strand atlas with 4a coverage silhouettes"
+    },
+    {
+      "match": { "techset": "techset_3aa45554dfc644e0" },
+      "profile": "character.unresolved_overlay",
+      "note": "Research project: white constant plus grain overlay, contribution disabled"
+    },
+    {
+      "match": { "name_regex": "material_5b519c79a23de53d" },
+      "profile": "character.eye",
+      "note": "Research project: iris/sclera atlas"
+    },
+    {
+      "match": { "name_regex": "material_3c5852033a98fa18" },
+      "profile": "character.cornea_candidate",
+      "note": "Research project: eye-covering transmissive shell candidate"
+    },
+    {
+      "match": { "name_regex": "material_3e715c391e870b93" },
+      "profile": "character.tearline",
+      "note": "Research project: eye-edge coverage candidate"
+    },
+    {
+      "match": { "name_regex": "material_6aa474a8a6fc0d71" },
+      "profile": "character.oral",
+      "note": "Research project: teeth/gums atlas"
+    },
+    {
+      "match": { "asset_regex": "_(body|head)_mp_" },
+      "profile": "character.cloth",
+      "note": "Example: character body/head assets default to cloth-safe dielectric; classify per material by inspection for better results"
+    }
+  ],
+  "camo": {
+    "note": "Defaults follow the rex_camo_special_01 research asset. Placement is an artist-facing presentation assumption; adjust Scale/Offset/Rotation per material.",
+    "roles": {
+      "paint_color": "0",
+      "pattern_color": "1",
+      "pattern_mask": "f",
+      "sticker_color": "2",
+      "sticker_mask": "10",
+      "paint_nog_candidate": "7",
+      "sticker_nog_candidate": "9"
+    },
+    "alias_slots": { "4": "1", "12": "f" },
+    "retained_not_applied": ["3", "a"],
+    "origin_world": [0.0, 0.0, 0.08],
+    "coordinates": {
+      "paint": { "scale": 5, "offset": [0.5, 0.5, 0], "rotation": 0 },
+      "pattern": { "scale": 5, "offset": [0.5, 0.5, 0], "rotation": 0 },
+      "sticker": { "scale": 9, "offset": [0.1, 0.7, 0], "rotation": 0 }
+    },
+    "controls": {
+      "Strength": 1,
+      "Coverage Mask": 1,
+      "Preserve Original Metal": 1,
+      "Pattern Amount": 1,
+      "Pattern Mask Gain": 3,
+      "Sticker Amount": 1,
+      "Gloss Map Weight": 1,
+      "Paint Roughness": 0.5,
+      "Paint Metallic": 0,
+      "Roughness Offset": 0,
+      "Tint": [1, 1, 1, 1]
+    }
+  }
+}
