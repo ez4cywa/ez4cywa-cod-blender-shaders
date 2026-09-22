@@ -15,11 +15,11 @@
 
 这里是该研究的**干净开源子集**：
 
-- ✅ **19 个自包含节点组**——全部合并进单一 `.blend` 文件，无贴图依赖、无外部路径、开箱即用
+- ✅ **21 个自包含节点组**——全部合并进单一 `.blend` 文件，无贴图依赖、无外部路径、开箱即用
 - ✅ **cast 材质自动加载**——根据 `.cast` 文件中的材质路径与贴图槽位，自动生成接好节点组的武器/人物/迷彩材质并赋予网格，见 [docs/AUTO_MATERIALS.md](docs/AUTO_MATERIALS.md)
 - ✅ **资产浏览器友好**——所有节点组已标记为 Blender 资产并打好分类标签，追加后直接在 Asset Browser 里筛选
 - ✅ **经过数值验证**——各版本交付均附带 Cycles 32 位线性 EXR 探针，误差普遍在 1e-5 ~ 1e-8 量级
-- ✅ **中文教程总览**——15 篇教程的知识地图与阅读路径，见 [docs/TUTORIALS_SUMMARY.md](docs/TUTORIALS_SUMMARY.md)
+- ✅ **中文教程总览**——16 篇教程的知识地图与阅读路径，见 [docs/TUTORIALS_SUMMARY.md](docs/TUTORIALS_SUMMARY.md)
 
 ❌ 不包含任何游戏原始素材：无贴图、无模型、无提取内容。节点组中的参数是研究候选值，不代表游戏运行时常量。
 
@@ -70,6 +70,13 @@
 | `COD_Weapon_Master_v2` | v2 武器总装：接入 DXIL 证据的编码缩放与光泽调整 |
 | `COD_Character_Surface_v1` | 人物表面总装：皮肤尺度、发片覆盖、眼部层次的分类材质 |
 | `COD_Character_Surface_v2` | v2 人物表面：将 v2 控制应用于原有分类人物表面 |
+| `COD_Master_Surface_v11` | 统一主入口：`Glass Mode` 开关在武器 v2 与薄壁玻璃间切换 |
+
+### 玻璃 Glass
+
+| 节点组 | 功能 |
+| --- | --- |
+| `COD_Optic_Glass_Master_v1` | 光学薄壁玻璃：Tint/IOR 1.46/Thin Wall、NOG 法线与光泽候选、污渍 Mix 与纳米镀膜薄膜（默认关闭） |
 
 ## 快速开始
 
@@ -116,11 +123,11 @@ python scripts/cast_spec.py --cast path/to/model.cast --out spec.json
 
 把本仓库目录添加为 Blender 资产库（`Preferences → File Paths → Asset Libraries`），打开库文件即可看到全部节点组，按标签筛选：
 
-- `COD 解码 Decode` · `COD 迷彩 Camo` · `COD 法线 Normal` · `COD 几何 Basis Frame` · `COD 主材质 Master`
+- `COD 解码 Decode` · `COD 迷彩 Camo` · `COD 法线 Normal` · `COD 几何 Basis Frame` · `COD 主材质 Master` · `COD 玻璃 Glass`
 
 ## 学习路径
 
-完整教程全文在私密研究仓库中，本仓库提供 **[教程总览](docs/TUTORIALS_SUMMARY.md)**：15 篇教程的定位、要点、对应节点组与推荐阅读路径。工具文档：**[cast 材质自动加载](docs/AUTO_MATERIALS.md)** · **[Maya 2025 移植计划](docs/MAYA_2025_PORT.md)**。三条典型路径：
+完整教程全文在私密研究仓库中，本仓库提供 **[教程总览](docs/TUTORIALS_SUMMARY.md)**：16 篇教程的定位、要点、对应节点组与推荐阅读路径。独立成篇的实战：**[瞄准镜薄壁玻璃 v11](docs/GLASS_V11_TUTORIAL.md)**。工具文档：**[cast 材质自动加载](docs/AUTO_MATERIALS.md)** · **[Maya 2025 移植计划](docs/MAYA_2025_PORT.md)**。三条典型路径：
 
 - **入门**：节点连线指导 → 武器与人物实战 → 迷彩实战
 - **原理**：本地游戏程序与 Shader v2 → 法线 v4 → 方向基 v5 → 分页矩阵 v6 → 压缩三角形 v7
