@@ -6,8 +6,7 @@
 
 ```
 *.cast ──► scripts/cast_spec.py ──► spec.json ──► scripts/autobuild_materials.py ──► Blender 材质
-          纯 Python，无需 Blender                 Append shaders/ez4cywa_COD_Shader_Library.blend
-          （也是未来 Maya 移植的共享接口）
+          纯 Python，无需 Blender                  Append shaders/ez4cywa_COD_Shader_Library.blend
 ```
 
 - `scripts/cast_spec.py`：解析 cast 材质路径与槽位、交叉核对 `_mat_info` 语义表、按规则分类 profile、输出规格 JSON

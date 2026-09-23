@@ -109,15 +109,11 @@ blender -b --factory-startup --python-exit-code 1 --python scripts/autobuild_mat
 - 哨兵图程序生成、上游插件原地升级、跨资产同名材质自动拆分
 - 详细用法、角色表与边界：**[docs/AUTO_MATERIALS.md](docs/AUTO_MATERIALS.md)**
 
-只提取规格（普通 Python，不需要 Blender，也是 Maya 移植的共享接口）：
+只提取规格（普通 Python，不需要 Blender）：
 
 ```powershell
 python scripts/cast_spec.py --cast path/to/model.cast --out spec.json
 ```
-
-## Maya 2025 移植状态
-
-**可行性分析与分阶段移植计划已交付（P0）**：结论为可行——数学层低难度、纹理层中等、CORNER 数据通路推荐导入期离线烘焙、Principled→aiStandardSurface 需标定；推荐"Arnold 原生节点图为主干 + OSL 承载数学核心"的组合路线。含四层节点映射表、三条路径对比与 P1–P6 阶段验收标准，见 **[docs/MAYA_2025_PORT.md](docs/MAYA_2025_PORT.md)**。尚未开始移植实施。
 
 ## 资产浏览器用法
 
@@ -127,7 +123,7 @@ python scripts/cast_spec.py --cast path/to/model.cast --out spec.json
 
 ## 学习路径
 
-完整教程全文在私密研究仓库中，本仓库提供 **[教程总览](docs/TUTORIALS_SUMMARY.md)**：16 篇教程的定位、要点、对应节点组与推荐阅读路径。独立成篇的实战：**[瞄准镜薄壁玻璃 v11](docs/GLASS_V11_TUTORIAL.md)**。工具文档：**[cast 材质自动加载](docs/AUTO_MATERIALS.md)** · **[Maya 2025 移植计划](docs/MAYA_2025_PORT.md)**。三条典型路径：
+完整教程全文在私密研究仓库中，本仓库提供 **[教程总览](docs/TUTORIALS_SUMMARY.md)**：16 篇教程的定位、要点、对应节点组与推荐阅读路径。独立成篇的实战：**[瞄准镜薄壁玻璃 v11](docs/GLASS_V11_TUTORIAL.md)**。工具文档：**[cast 材质自动加载](docs/AUTO_MATERIALS.md)**。三条典型路径：
 
 - **入门**：节点连线指导 → 武器与人物实战 → 迷彩实战
 - **原理**：本地游戏程序与 Shader v2 → 法线 v4 → 方向基 v5 → 分页矩阵 v6 → 压缩三角形 v7

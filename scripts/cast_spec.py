@@ -2,8 +2,8 @@
 
 Pipeline: cast slots + _mat_info semantics + optional config + profile rules -> spec.json
 
-The spec is the DCC-agnostic contract consumed by autobuild_materials.py (Blender)
-and, in the planned migration, by a Maya 2025 builder.
+The spec is the machine-readable contract consumed by
+scripts/autobuild_materials.py (Blender).
 
 Role resolution priority:
   1. _mat_info/<material>.txt semantic table cross-checked against cast slots by path

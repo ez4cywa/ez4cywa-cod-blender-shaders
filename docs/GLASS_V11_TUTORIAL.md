@@ -74,5 +74,5 @@ Blender 5.2.2 提供原生 Thin Wall 输入，本模型开放薄片默认开启�
 
 ## 相关文档
 
-- [教程总览](TUTORIALS_SUMMARY.md) · [cast 材质自动加载](AUTO_MATERIALS.md) · [Maya 2025 移植计划](MAYA_2025_PORT.md)
+- [教程总览](TUTORIALS_SUMMARY.md) · [cast 材质自动加载](AUTO_MATERIALS.md)
 - 节点组目录与用法见 [README](../README.md#节点组目录)
