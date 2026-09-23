@@ -18,3 +18,16 @@ model/texture container format. This repository uses it in two ways:
 
 This repository does not patch the vendored add-on. Updates follow upstream
 pinned commits only.
+
+## maya_cast_plugin/
+
+Upstream: [dtzxporter/cast](https://github.com/dtzxporter/cast) release asset
+`maya_cast_plugin.zip` (translator version `1.87`)
+License: MIT (same upstream repository as `cast_addon/`)
+Files: `cast.py`, `castplugin.py`, `castpluginoptions.mel` — copied unmodified.
+
+This is the official Maya file translator used by
+`scripts/maya/cast_import.py` (migration phase P1). `castplugin.py` ships its
+own `cast.py` revision; it is loaded in dedicated Maya sessions and never
+mixed with `cast_addon/cast.py` in the same Python process.
+
